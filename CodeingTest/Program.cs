@@ -11,11 +11,11 @@ namespace CodeingTest
 
             List<PromotionsModel> _promotionsModels = new List<PromotionsModel>();
             int _totalPrice = 0;
-            Console.WriteLine("total number of order");
+            Console.WriteLine("total number of No of Unit");
             int a = Convert.ToInt32(Console.ReadLine());
             for (int i = 0; i < a; i++)
             {
-                Console.WriteLine("enter the type of product:A,B,C or D");
+                Console.WriteLine("enter the type of promotions:A,B,C or D");
                 string type = Console.ReadLine();
                 PromotionsModel promotionsModel = new PromotionsModel();
                 promotionsModel.GetPriceByType(type);
