@@ -8,5 +8,7 @@ namespace CodeingTest
     {
         int GetTotalPrice(List<PromotionsModel> PromotionsModels);
         void GetPriceByType(string Unit);
+
+        void GetCalculatedUnit(PromotionsModel PromotionsModel, ref int unitofUnit);
     }
 }

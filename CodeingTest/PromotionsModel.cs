@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CodeingTest
 {
     public class PromotionsModel : IPromotions
     {
+        private string[] unitPermotionList;
+
         public string _unit { get; set; }
         public decimal _price { get; set; }
+
         
         public int GetTotalPrice(List<PromotionsModel> PromotionsModels)
         {
+            int UnitOfCharCount = 0;
             int UnitOfA = 0;
             int PriceOfA = 50;
             int UnitOfB = 0;
@@ -21,21 +26,35 @@ namespace CodeingTest
             int PriveOfD = 15;
             foreach (PromotionsModel pr in PromotionsModels)
             {
+                GetCalculatedUnit(pr, ref UnitOfCharCount);
+
                 if (pr._unit == "A" || pr._unit == "a")
                 {
-                    UnitOfA = UnitOfA + 1;
+                    if (UnitOfCharCount == 0)
+                        UnitOfA = UnitOfA + 1;
+                    else
+                        UnitOfA = UnitOfCharCount;
                 }
                 if (pr._unit == "B" || pr._unit == "b")
                 {
-                    UnitOfB = UnitOfB + 1;
+                    if (UnitOfCharCount == 0)
+                        UnitOfB = UnitOfB + 1;
+                    else
+                        UnitOfB = UnitOfCharCount;
                 }
                 if (pr._unit == "C" || pr._unit == "c")
                 {
-                    UnitOfC = UnitOfC + 1;
+                    if (UnitOfCharCount == 0)
+                        UnitOfC = UnitOfC + 1;
+                    else
+                        UnitOfC = UnitOfCharCount;
                 }
                 if (pr._unit == "D" || pr._unit == "d")
                 {
-                    UnitOfD = UnitOfD + 1;
+                    if (UnitOfCharCount == 0)
+                        UnitOfD = UnitOfD + 1;
+                    else
+                        UnitOfD = UnitOfCharCount;
                 }
             }
             int TotalPriceOfA = (UnitOfA / 3) * 130 + (UnitOfA % 3 * PriceOfA);
@@ -69,6 +88,22 @@ namespace CodeingTest
                     this._price = 2015m;
                     break;
             }
+        }
+
+        public void GetCalculatedUnit(PromotionsModel PromotionsModel, ref int unitofUnit)
+        {
+            int number = 0;
+            string[] unitPermotionList = PromotionsModel._unit.Split(",");
+            foreach (string unitPermotion in unitPermotionList)
+            {
+                bool isNumeric = Regex.IsMatch(unitPermotion, @"^\d+$");
+
+                if (!isNumeric)
+                    PromotionsModel._unit = unitPermotion;
+                else
+                    unitofUnit = Convert.ToInt32(unitPermotion);
+            }
+            //return unitofUnit;
         }
     }
 }

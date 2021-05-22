@@ -35,5 +35,18 @@ namespace UnitTestCodeing
             var result = promotionsModelObj.GetTotalPrice(Fack_promotionsModelsWithWrongPriceComapir);
             Assert.AreNotEqual(100, result);
         }
+
+        public void PromotionsModels_With_ValueOfMultiPlerice()
+        {
+            List<PromotionsModel> Fack_promotionsModelsWithWrongPriceComapir = new List<PromotionsModel>
+            {
+                new PromotionsModel { _unit = "5,A", _price = 50M },
+                new PromotionsModel {_unit = "5,B", _price = 30M },
+                new PromotionsModel {_unit = "1,C", _price = 30M },
+            };
+            PromotionsModel promotionsModelObj = new PromotionsModel();
+            var result = promotionsModelObj.GetTotalPrice(Fack_promotionsModelsWithWrongPriceComapir);
+            Assert.AreNotEqual(100, result);
+        }
     }
 }
